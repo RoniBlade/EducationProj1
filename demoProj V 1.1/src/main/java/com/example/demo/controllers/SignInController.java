@@ -8,7 +8,7 @@ public class SignInController {
 
     @GetMapping("/signIn")
     public String getSignInPage(){
-        return "signIn_page";
+        return "SignPages/signIn_page";
     }
 
 }

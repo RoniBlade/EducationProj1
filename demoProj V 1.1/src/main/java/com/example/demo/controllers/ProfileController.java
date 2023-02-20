@@ -27,7 +27,7 @@ public class ProfileController {
                              Model model){
 
         model.addAttribute("user", profileService.getCurrent(userDetails));
-        return "profile_page";
+        return "Profile/profile_page";
     }
 
 }

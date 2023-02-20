@@ -1,21 +1,26 @@
 package com.example.demo.services.impl;
 
 import com.example.demo.dto.UserForm;
+import com.example.demo.exceptions.AlreadyExistsException;
 import com.example.demo.models.User;
 import com.example.demo.repositories.UsersRepository;
 import com.example.demo.services.UsersService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 
 
 import java.util.List;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class UsersServiceImpl implements UsersService {
 
     private final UsersRepository usersRepository;
+    PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @Override
     public List<User> getAllUsers() {
@@ -29,10 +34,12 @@ public class UsersServiceImpl implements UsersService {
                 .email(user.getEmail())
                 .firstName(user.getFirstName())
                 .lastName(user.getLastName())
+                .age(user.getAge())
+                .password(passwordEncoder.encode(user.getPassword()))
                 .state(User.State.NOT_CONFIRMED)
                 .build();
 
-        usersRepository.save(newUser);
+            usersRepository.save(newUser);
     }
 
     @Override
@@ -58,7 +65,6 @@ public class UsersServiceImpl implements UsersService {
         userForDelete.setState(User.State.DELETED);
 
         usersRepository.save(userForDelete);
-
-
     }
+
 }

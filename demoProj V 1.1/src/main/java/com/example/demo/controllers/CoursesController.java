@@ -23,7 +23,7 @@ public class CoursesController {
                                  Model model){
         model.addAttribute("role", customUserDetails.getUser().getRole());
         model.addAttribute("courses", courseService.getCourses());
-        return "courses_page";
+        return "Courses/courses_page";
     }
 
     @PostMapping("/{course-id}/students")
@@ -39,7 +39,7 @@ public class CoursesController {
         model.addAttribute("course", courseService.getCourse(courseId));
         model.addAttribute("notInCourseStudents", courseService.getNotInCourseStudents(courseId));
         model.addAttribute("inCourseStudents", courseService.getInCourseStudents(courseId));
-        return "course_page";
+        return "Courses/course_page";
     }
 
 }

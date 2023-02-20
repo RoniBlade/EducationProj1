@@ -32,6 +32,9 @@ public class SecurityConfig {
                         .failureUrl("/signIn?error")
                         .usernameParameter("email")
                         .passwordParameter("password")
+                        .permitAll()
+                        .and()
+                        .logout()
                         .permitAll();
 
         httpSecurity.rememberMe()
@@ -39,6 +42,7 @@ public class SecurityConfig {
                                 .tokenRepository(tokenRepository)
                                         .tokenValiditySeconds(60*60*24*365);
 
+        httpSecurity.authorizeHttpRequests().antMatchers("/css/**").permitAll();
         httpSecurity.authorizeHttpRequests().antMatchers("/**").authenticated();
         httpSecurity.authorizeHttpRequests().antMatchers("/users/**").hasAuthority("ADMIN");
 
