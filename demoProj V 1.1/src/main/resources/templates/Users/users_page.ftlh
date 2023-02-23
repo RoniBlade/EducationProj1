@@ -20,7 +20,6 @@
           <th>First Name</th>
           <th>Last Name</th>
           <th>Email</th>
-          <th>Delete</th>
         </tr>
       </thead>
       <tbody>
@@ -29,7 +28,6 @@
           <td>${user.firstName}</td>
           <td>${user.lastName}</td>
           <td>${user.email}</td>
-          <td class="delete" onclick="location.href='/users/${user.id}/delete';">X</td>
         </tr>
     </#list>
       </tbody>

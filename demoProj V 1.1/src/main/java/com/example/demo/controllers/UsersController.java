@@ -40,7 +40,12 @@ public class UsersController {
     }
 
     @PostMapping("/users/{user-id}/update")
-    public String updateUser(@PathVariable("user-id") Long userId, UserForm user) {
+    public String updateUser(@PathVariable("user-id") Long userId, UserForm user, Model model) {
+        if(user.getAge() < 0){
+            model.addAttribute("error", "Age should be > 0");
+            return "redirect:/users/" + userId;
+        }
+        model.addAttribute("error", "");
         usersService.updateUser(userId, user);
         return "redirect:/users/" + userId;
     }
